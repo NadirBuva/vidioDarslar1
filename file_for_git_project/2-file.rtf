@@ -1,0 +1,492 @@
+{\rtf1\ansi\ansicpg1251\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;\f2\froman\fcharset0 Times-Roman;
+\f3\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\csgray\c0;\cssrgb\c0\c0\c0;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid1\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid2\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid3\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li2160\lin2160 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid4\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li2880\lin2880 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid5\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li3600\lin3600 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid6\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li4320\lin4320 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww12700\viewh10220\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 2- file o\'92zgarishlari \
+\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs34 \cf0 select f.city , max(lc.monthlyprice) as max_price , avg(lc.monthlyprice) as avg_monthly,\
+max(lc.enddate- lc.startdate) as m, \
+avg(lc.enddate - lc.startdate) \
+from flat as f inner join leasing_contract as lc on f.fcode = lc.fcode \
+group  by f.city \
+having  count(lc.fcode)>3
+\fs40 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf2 \CocoaLigature0  select name ,  if (id in (select bid from ish ) , 'Ishlaydi' , 'Ishlamaydi') \
+ from bekorchi \
+ group by  name ;\
+\
+select sid , pid , \
+case \
+when qty<=200 then 'Oz'\
+when qty<=300 and qty >200 then 'Ortacha'\
+else 'Kop'\
+end \
+from sp ;\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs26 \cf2 \
+select title ,case \
+when length<= 50 then  'Short'\
+when length <= 120 then 'Medium'\
+when length>120 then 'long'\
+end \
+from film\
+order by title\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs30 select sum  (case when  rental_rate=0.99 then 1 else 0 end  ) ,  sum (case when  rental_rate=2.99 then 1 else 0 end) , sum(case when  rental_rate=4.99 then 1 else 0 end) \
+from film ;\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs26 \
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs30  select * ,\
+ case when discount != 0 then price-discount \
+ When discount = null then price - 0\
+ end \
+ from items ;\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs26  \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs34 select b.snn ,b.pname , count(vb.snn)\
+from patient as b inner join visit_booking as vb on b.snn = vb.snn\
+order by b.snn ;
+\fs26 \
+\
+\
+\
+
+\fs34 select b.snn , count(b.snn) , b.pname\
+from patient as b\
+group by b.pname ;\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs28 \cf2 select ssn , count (ssn)\
+from visit_booking \
+\
+order by ssn \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs34 \cf2 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs28 \cf2 select vs.ssn , count (vs.ssn) , p.pname \
+from visit_booking as vs inner join patient p on vs.ssn = p.ssn \
+group by vs.ssn , p.pname  having count(vs.ssn)>=3 ;
+\fs34 \cf2 \
+\
+\
+\pard\pardeftab720\li960\fi-480\sl254\sa213\partightenfactor0
+
+\f2\fs37\fsmilli18667 \cf3 \expnd0\expndtw0\kerning0
+\CocoaLigature1 1960 yildan keyin tug\'92ilgan va birontaham cardiolog \
+do\'92ktoriga ko\'92rinmagan bemorning ssn raqami va \
+ismini ko\'92rsating. (Cardiologic) \
+\
+
+\f1\fs34 \cf2 \kerning1\expnd0\expndtw0 \CocoaLigature0 Select descount(d.dcode) \
+From 
+\fs28 VISIT_BOOKING  as vb  inner join DOCTOR as d on vb.dcode = d.dcode \
+Where vb.vcode = SP001  \
+Group by dname  	\
+Limit 1 ;
+\fs34 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs28 \cf2 Select descount p.pname \
+From patient as p inner join visit_booking as vs  on p.ssn=vs.ssn\
+Where p.birthdate > '1960-01-01'\
+And vs.vcode != \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs34 \cf2 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs28 \cf2   ssn  |                       pname                        \
+-------+----------------------------------------------------\
+ P0002 | Barth                                             \
+ P0003 | Serth                                             \
+ P0004 | Williams                                          \
+ P0005 | Brown                                             \
+ P0006 | May                   
+\fs34 \cf2 \
+\
+
+\fs28 \cf2 select c.name  , c.surname \
+from customer as c inner join RENTAL_RESERVATION as rr on c.ssn = rr.ssn \
+Where rr.numberplate != AV232WR or  rr.numberplate != AZ422TY 
+\fs22 \cf2  Group by c.name , c.surname  ;\
+Group	by c.name , c.surname ;\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs34 \
+\
+\pard\pardeftab720\li960\fi-480\sl254\sa213\partightenfactor0
+
+\f2\fs37\fsmilli18667 \cf3 \expnd0\expndtw0\kerning0
+\CocoaLigature1 2006 yilning November oyidagi eng kamida 3 arenda shartnomasi qilgan\\\
+ ArendaDatel (car_rental) larning kodi, firmani nomi va 2006 \
+yil davomida umumiy qilingan arendal shartnomalar sonini toping\
+\pard\pardeftab720\li960\fi-480\sl254\sa213\partightenfactor0
+
+\fs28 \cf3 \
+Select   cr1.crname \
+From 
+\f1 \cf2 \kerning1\expnd0\expndtw0 \CocoaLigature0 CAR_RENTAL as cr1 inner join RENTAL_RESERVATION as rr on rr.crcode = cr1.crcode\
+Where rr.reservationdate between 2006-11-01 and 2006-11-30  group by cr1.crname having 
+\f2 \cf3 \expnd0\expndtw0\kerning0
+\CocoaLigature1 count	( rr.
+\f1 \cf2 \kerning1\expnd0\expndtw0 \CocoaLigature0 crcode) >=3  
+\fs20    
+\fs34 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs36 select cr.crname , cr.crcode , count (rr.crcode)\
+from car_rental as cr inner join rental_reservation  as rr on rr.crcode = cr.crcode \
+where rr.reservationdate between '2006-01-01' and '2006-12-30'  and \
+cr.crname in (Select   cr1.crname \
+From CAR_RENTAL as cr1 inner join RENTAL_RESERVATION as rr on rr.crcode = cr1.crcode\
+Where rr.reservationdate between 2006-11-01 and 2006-11-30  group by cr1.crname having count( rr.crcode) =3 )\
+Group by cr.crname , cr.crcode 
+\fs34 \
+\
+\
+Select p.ownername , p.address , p.city \
+From pharmacy as p inner join sale as s on s.pcode = p.pcode \
+Where s.dcode != D0002 group by p.ownername , p.address , p.city ;\
+\
+\
+\pard\pardeftab720\li960\fi-480\sl254\sa213\partightenfactor0
+
+\f2\fs37\fsmilli18667 \cf3 \expnd0\expndtw0\kerning0
+\CocoaLigature1 Barcha sotilgan dorilarning o\'92rtacha qiymatidan ko\'92p dori\
+ sotgan \'a0dorixonalarning \'a0kodi, egasini nomi  va \'a02007 yilda\
+ Bayer dorisini sotilgan soni toping. (Maker = \'92Bayer\'92)\
+\
+Select round(avg(
+\f1\fs24 \cf2 \kerning1\expnd0\expndtw0 \CocoaLigature0 quantity
+\f2\fs37\fsmilli18667 \cf3 \expnd0\expndtw0\kerning0
+\CocoaLigature1 )) \
+From sale\
+\
+\pard\pardeftab720\li960\fi-480\sl254\sa213\partightenfactor0
+
+\fs30 \cf3 Select   d.name ,d.
+\f1 \cf2 \kerning1\expnd0\expndtw0 \CocoaLigature0 dcode  , d.maker  , case when d.maker = Bayer then sum(s.quantity) end
+\f2 \cf3 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+From drug as d inner join  sale as s on  d.dcode = s.dcode \
+Where  s.quantity   > (
+\f1\fs24 \cf2 \kerning1\expnd0\expndtw0 \CocoaLigature0 Select round(avg(quantity)) \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+                      From sale )\
+    Group by 
+\f2\fs30 \cf3 \expnd0\expndtw0\kerning0
+\CocoaLigature1   d.name ,d.
+\f1 \cf2 \kerning1\expnd0\expndtw0 \CocoaLigature0 dcode  , d.maker
+\fs24 \
+\pard\pardeftab720\li960\fi-480\sl254\sa213\partightenfactor0
+
+\f2\fs37\fsmilli18667 \cf3 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs34 \cf2 \kerning1\expnd0\expndtw0 \CocoaLigature0 create table cities (\
+city_id integer ,\
+city_name varchar (255) ,\
+population bigint ) ;\
+\pard\pardeftab720\li960\fi-480\sl254\sa213\partightenfactor0
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\
+\
+insert into profile ( id ,name , surname , age ,  email , login , password , birthdate , created_date )\
+values ( 1 , Alisher' , 'Alisherov' , 23 ,@emailjon1  ,  login1 ,  root1 , 1990-09-01  ,   now()),\
+       ( 2 , Valisher' , \'91Valisherov' , 23 ,@emailjon2 ,  login2 ,  root2 , 2003-03-13  ,   now())\
+\
+\
+\
+create table contact (\
+id uuid primary key ,\
+name varchar (50) ,\
+surname varchar (50) ,\
+phone varchar(15) not null  unique,\
+create_date timestamp ); \
+\
+\
+\
+insert into contact (name , surname , phone ) \
+\
+\
+\
+insert into contact ( id ,  name , surname , phone ,create_date )\
+values ('Alisher' , 'Alisherov' , \'9290744\'92, now());\
+\
+\
+\
+('Valisher' , 'Valisherov' , '90744' ) ;\
+\
+create table tanka (\
+id serial primary key ,\
+age int check (age > 18 ),\
+name varchar(30) check (char_length(trim(name))>= 3) ) ;\
+\
+\
+\
+insert into tanka (age , name )\
+values (19 , 'qasad) ;\
+drop table profile;\
+drop table message; \
+\
+create table profile(\
+  id serial primary	 key ,\
+  name varchar(20)\
+);\
+\
+insert into profile(name) values('Valish');\
+\pard\tx3820\tx4320\tx4480\tx5040\tx5600\tx6160\tx6720\li4320\fi-4320\pardirnatural\partightenfactor0
+\ls1\ilvl5\CocoaLigature1 {\listtext	
+\f3 \uc0\u8259 
+\f1 	}\CocoaLigature0 select * from profile;      Nodirbek\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\
+      \
+create table message(\
+  id serial,\
+  content text not null,\
+  pid integer not null,\
+Foreign	 key (pid) references profile (id)\
+);\
+insert into message(content,pid) values('Mushukcha',1);\
+select * from profile;\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+Task 6 //////////////////////////////////////////////////////////////////////\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs28 \cf2 select * \
+from person \
+where person.name not in (select childname from parent) and age < 10 ;\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs34 \cf2 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs28 \cf2                         name                        | sex | age \
+----------------------------------------------------+-----+-----\
+ Stella                                             | F   |   5\
+(1 row)\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs34 \cf2 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs28 \cf2 select vs.ssn , count (vs.ssn) , p.pname \
+from visit_booking as vs inner join patient p on vs.ssn = p.ssn \
+group by vs.ssn , p.pname  having count(vs.ssn)>=3 ; \
+\
+\
+ ssn  | count |                       pname                        \
+-------+-------+----------------------------------------------------\
+ P0002 |     3 | Barth                                             \
+ P0006 |     3 | May                                               \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs34 \cf2 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs28 \cf2 Select p.ssn , p.pname \
+From patient as p inner join visit_booking as vs  on p.ssn=vs.ssn\
+Where p.birthdate > '1960-01-01'\
+And vs.vcode != 'SP001'\
+Group by p.ssn , p.pname ;\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs34 \cf2  \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs28 \cf2  ssn  |                       pname                        \
+-------+----------------------------------------------------\
+ P0002 | Barth                                             \
+ P0003 | Serth                                             \
+ P0002 | Barth                                             \
+ P0002 | Barth                                             \
+ P0003 | Serth                                            
+\fs34 \cf2 \
+\
+\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs26 select c.name  , c.surname \
+from customer as c inner join RENTAL_RESERVATION as rr on c.ssn = rr.ssn \
+Where rr.numberplate != 'AV232WR' or  rr.numberplate != 'AZ422TY'  Group by c.name , c.surname ;\
+ \
+                   name                   |                 surname                  \
+------------------------------------------+------------------------------------------\
+ Gigi                                     | Neri                                    \
+ Sergio                                   | Bianchi                                 \
+ Mario                                    | Rossi                               \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs34 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs26 select cr.crname , cr.crcode , count (rr.crcode)\
+from car_rental as cr inner join rental_reservation  as rr on rr.crcode = cr.crcode \
+where rr.reservationdate between '2006-01-01' and '2006-12-30'  and \
+cr.crname in (Select   cr1.crname \
+From CAR_RENTAL as cr1 inner join RENTAL_RESERVATION as rr on rr.crcode = cr1.crcode\
+Where rr.reservationdate between '2006-11-01' and '2006-11-30'  group by cr1.crname having count( rr.crcode)\
+=3 ) group by cr.crname , cr.crcode ;\
+\
+\
+                       crname                       | crcode | count \
+----------------------------------------------------+--------+-------\
+ Car Rental Roma                                    | CR001  |     5
+\fs36 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs34  \
+\
+/// xato \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs30 Select p.ownername , p.address , p.city \
+From pharmacy as p inner join sale as s on s.pcode = p.pcode \
+Where s.dcode != 'D0002' group by p.ownername , p.address , p.city ;\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs34 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs24                      ownername                      |                      address                       |                        city                        \
+----------------------------------------------------+----------------------------------------------------+----------------------------------------------------\
+ Boschi                                             | Via Sacchi 10                                      | Turin                                             \
+ Brambilla                                          | Via Genova 43                                      | Milan                                             \
+ Restano                                            | Via Togliatti 10                                   | Rome                                              \
+(3 rows)\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs34 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs28 \cf2 \
+Select   d.name ,d.dcode  , d.maker  , case when d.maker = 'Bayer' then sum(s.quantity) end\
+From drug as d inner join  sale as s on  d.dcode = s.dcode\
+Where  s.quantity   > (Select round(avg(quantity))\
+                      From sale )\
+    Group by   d.name ,d.dcode  , d.maker ; \
+ \
+                   name                   | dcode |                       maker                        | case \
+------------------------------------------+-------+----------------------------------------------------+------\
+ Tachipirina                              | D0002 | Bayer                                              |  500\
+ TOPBIOTIC                                | D0003 | Bayer                                              |  860
+\fs24 \cf2 \
+ XANAX                                    | D0004 | Pray                                               |     \
+(3 rows)\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs34 \
+\
+\
+\
+\
+\
+\
+ ////////////////////////////////// sqlzoo tasks////////////////////////////////////\
+\
+\
+\
+SELECT name, DAY(whn),\
+ confirmed, deaths, recovered\
+ FROM covid\
+WHERE name = 'Spain'\
+AND MONTH(whn) = 3 AND YEAR(whn) = 2020\
+ORDER BY whn\
+\
+\
+\
+SELECT name, DAY(whn), confirmed,\
+   LAG(confirmed, 1) OVER (partition by name ORDER BY whn) AS lag\
+ FROM covid\
+WHERE name = 'Italy'\
+AND MONTH(whn) = 3\
+ORDER BY whn\
+\
+\
+\
+SELECT name, DAY(whn), confirmed,\
+   LAG(confirmed, 1) OVER (PARTITION BY name ORDER BY whn)\
+ FROM covid\
+WHERE name = 'Italy'\
+AND MONTH(whn) = 3 AND YEAR(whn) = 2020\
+ORDER BY whn\
+\
+Man begun Azizbek bilan brig o\'92ynadik caomputert va dars qilish uchun tayyorgarlik ko\'92rdik \
+Lekin Aizizbek chumaga o\'92xshab dars qilolmadi to\'92g\'92rirog\'92fdfcdsstghchfh\uc0\u1076 \u1099 \u1088 \u1097 \u1088 \u1082 \u1075 \u1095 \u1080 \u1091 \u1082 \u1086 \u1083 \u1083 \u1083 \u1083 \u1072 \u1100 \u1072 /\u1097 \u1097 \u1075 \u1075 \u1077 \u1085 7\u1082 \u1077 \u1085 9\u1079 \u1077 \u1096 7\u1072 \u1087 \u1076 \u1096 \u1075 \u1085 \u1072 \u1078 \u1086 \u1088 \u1087 \u1086  
+\fs26 \
+}
